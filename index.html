@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Pak Ketua!</title>
+    
+    <style>
+        /* --- Desain Modern & Elegan --- */
+        body { 
+            background: #0f172a; /* Gelap elegan */
+            background-image: radial-gradient(circle at 20% 30%, #1e293b 0%, #0f172a 100%);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            text-align: center; margin: 0; padding: 20px;
+            display: flex; flex-direction: column; justify-content: center; 
+            min-height: 100vh; overflow: hidden; color: white;
+        }
+
+        #surprise-box { 
+            display: none; 
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); /* Efek Kaca */
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: slideUp 1s ease-out;
+        }
+
+        h1 { 
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.8em; font-weight: 800; margin: 10px 0;
+        }
+
+        p { color: #cbd5e1; font-size: 1.1em; line-height: 1.6; }
+
+        /* --- Bingkai Foto Futuristik --- */
+        .foto-container {
+            position: relative;
+            width: 180px; height: 180px;
+            margin: 0 auto 25px;
+        }
+
+        .foto-container::before {
+            content: '';
+            position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
+            background: linear-gradient(45deg, #60a5fa, #a855f7);
+            border-radius: 50%;
+            z-index: -1;
+            animation: spin 3s linear infinite;
+        }
+
+        #foto-profil {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #0f172a;
+        }
+
+        /* --- Tombol Neon --- */
+        .btn-action { 
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            color: white; border: none;
+            padding: 18px 45px; font-size: 1.2em; font-weight: bold; 
+            border-radius: 15px; cursor: pointer; 
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tag-ketua {
+            display: inline-block;
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div id="start-screen">
+        <h2 style="font-size: 1.5em; letter-spacing: 2px;">PRESIDENTIAL SURPRISE</h2>
+        <p style="margin-bottom: 30px;">Ada pesan penting untuk sang Nahkoda...</p>
+        <button class="btn-action" onclick="mulaiKejutan()">OPEN MESSAGE ⚡</button>
+    </div>
+
+    <div id="surprise-box">
+        <span class="tag-ketua">THE LEADER</span>
+        <div class="foto-container">
+            <img id="foto-profil" src="https://drive.google.com/thumbnail?id=1Yw2EsOfLTiwksSf_ZZXm2qO7SFkQ-ypH" alt="Ketua Hima">
+        </div>
+        <h1>HBD Bu Ketua!</h1>
+        <p>Selamat ulang tahun buat nakhoda hebat kita! 🥂<br><br>
+        HBD Bu Kahima! Selamat berkurang jatah umur dan selamat bertambah beban pikiran buat Hima, hehe. 
+		Semoga makin sabar ngadepin anggota yang hobi Baceo wk, makin lancar rezekinya. Sukses terus bosku!</p>
+        <div style="margin-top: 20px; font-size: 0.8em; color: #64748b;">- Dari seluruh fungsionaris Hima -</div>
+    </div>
+
+    <script>
+        function playNote(freq, dur, startTime, type = 'square') {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = type; 
+            osc.frequency.setValueAtTime(freq, startTime);
+            g.gain.setValueAtTime(0.05, startTime);
+            g.gain.exponentialRampToValueAtTime(0.0001, startTime + dur);
+            osc.connect(g);
+            g.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + dur);
+        }
+
+        function playRockMelody() {
+            const n = { 'C': 261, 'D': 293, 'E': 329, 'F': 349, 'G': 392, 'A': 440, 'B': 493, 'C2': 523 };
+            const now = new (window.AudioContext || window.webkitAudioContext)().currentTime;
+            const melody = [
+                {f: n.C, d: 0.2}, {f: n.C, d: 0.1}, {f: n.D, d: 0.4}, {f: n.C, d: 0.4}, {f: n.F, d: 0.4}, {f: n.E, d: 0.8},
+                {f: n.C, d: 0.2}, {f: n.C, d: 0.1}, {f: n.D, d: 0.4}, {f: n.C, d: 0.4}, {f: n.G, d: 0.4}, {f: n.F, d: 0.8}
+            ];
+            let time = now;
+            melody.forEach(m => {
+                // Mainkan dua layer suara biar kayak gitar listrik (asik!)
+                playNote(m.f, m.d * 1.5, time, 'sawtooth');
+                playNote(m.f / 2, m.d * 1.5, time, 'square');
+                time += m.d * 1.1;
+            });
+        }
+
+        function mulaiKejutan() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('surprise-box').style.display = 'block';
+            
+            playRockMelody();
+
+            // Efek Kembang Api (Confetti Mewah)
+            var count = 200;
+            var defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55, });
+            fire(0.2, { spread: 60, });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45, });
+        }
+    </script>
+</body>
+</html>
